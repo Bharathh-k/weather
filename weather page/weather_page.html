@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        #weather-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #current-weather {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: black;
+            padding: 20px;
+        }
+
+        #current-weather img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        #forecast {
+            flex: 1;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px;
+            background-color: #555;
+        }
+
+        #top-right-image {
+            position: absolute;
+            width: 350px; 
+            height: 200px;
+            top: 10px;
+        }
+
+        #top-left-image {
+            position: absolute;
+            width: 200px; 
+            height: 200px;
+            top: 10px;
+            padding-left: 80px;
+        }
+
+        #top-left-image {
+            left: 10px;
+        }
+
+        #top-right-image {
+            right: 10px;
+        }
+
+        .day {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .day img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <img id="top-left-image" src="cloud.jpeg" alt="Top Left Image">
+    <img id="top-right-image" src="earth.jpeg" alt="Top Right Image">
+
+    <div id="weather-container">
+
+        <div id="current-weather">
+            <img src="https://placekitten.com/300/200" alt="Weather Mood">
+            <h2>Current Weather</h2>
+            <p>Max Temp: 25°C</p>
+            <p>Min Temp: 15°C</p>
+            <p>Current Temp: 20°C</p>
+        </div>
+
+        <div id="forecast">
+            <!-- Day 1 -->
+            <div class="day">
+                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <h3>Day 1</h3>
+                <p>Max Temp: 24°C</p>
+                <p>Min Temp: 14°C</p>
+            </div>
+
+            <!-- Day 2 -->
+            <div class="day">
+                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <h3>Day 2</h3>
+                <p>Max Temp: 26°C</p>
+                <p>Min Temp: 16°C</p>
+            </div>
+
+            <!-- Day 3 -->
+            <div class="day">
+                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <h3>Day 3</h3>
+                <p>Max Temp: 23°C</p>
+                <p>Min Temp: 13°C</p>
+            </div>
+
+            <!-- Day 4 -->
+            <div class="day">
+                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <h3>Day 4</h3>
+                <p>Max Temp: 22°C</p>
+                <p>Min Temp: 12°C</p>
+            </div>
+
+            <!-- Day 5 -->
+            <div class="day">
+                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <h3>Day 5</h3>
+                <p>Max Temp: 25°C</p>
+                <p>Min Temp: 15°C</p>
+            </div>
+
+            <!-- Day 6 -->
+            <div class="day">
+                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <h3>Day 6</h3>
+                <p>Max Temp: 27°C</p>
+                <p>Min Temp: 17°C</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
