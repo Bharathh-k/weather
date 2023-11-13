@@ -1,3 +1,3 @@
-# weather
-webTech Project
-using MERN stack
+# Project
+WT Project
+DSA Project
