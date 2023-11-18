@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Defining the structure for a task
+// Structure for a task
 struct Task {
     char description[100];
     int priority;
     char due_date[20];
     int is_done;
-    struct Task* next;  // Pointer to the next task in the linked list
+    struct Task* next;
 };
 
 // Head of the linked list
@@ -64,6 +64,7 @@ void displayTasks() {
     struct Task* current = head;
     int taskNumber = 1;
     while (current != NULL) {
+        // Printing task details
         printf("Task %d: Description: %s, Priority: %d, Due Date: %s, Status: %s\n",
                taskNumber++, current->description, current->priority, current->due_date,
                current->is_done ? "Done" : "Not Done");
@@ -71,19 +72,50 @@ void displayTasks() {
     }
 }
 
-// Function to mark a task as done
+// Function to mark a task as done and move it to the end
 void markTaskAsDone(int taskIndex) {
     struct Task* current = head;
+    struct Task* prev = NULL;
     int currentIndex = 0;
 
+    // Traverse the linked list to find the task at the given index
     while (current != NULL && currentIndex < taskIndex) {
+        prev = current;
         current = current->next;
         currentIndex++;
     }
 
     if (current != NULL) {
+        // If the task is already done, no need to rearrange
+        if (current->is_done == 1) {
+            printf("This task is already marked as done.\n");
+            return;
+        }
+
+        // Mark the task as done
         current->is_done = 1;
-        printf("Great job! Task marked as done.\n");
+
+        // If the task is not the last one, rearrange the linked list
+        if (current->next != NULL) {
+            // Unlink the current task
+            if (prev != NULL) {
+                prev->next = current->next;
+            } else {
+                head = current->next;
+            }
+
+            // Traverse to the end of the list
+            struct Task* lastTask = current;
+            while (lastTask->next != NULL) {
+                lastTask = lastTask->next;
+            }
+
+            // Place the completed task at the end
+            lastTask->next = current;
+            current->next = NULL;
+        }
+
+        printf("Great job! Task marked as done and moved to the end.\n");
     } else {
         printf("Uh-oh! Invalid task index. Task not found.\n");
     }
@@ -168,6 +200,4 @@ int main() {
                 printf("Oops! Invalid choice. Please try again.\n");
         }
     } while (choice != 5);
-
-    return 0;
 }
