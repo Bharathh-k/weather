@@ -44,29 +44,6 @@
             background-color: #555;
         }
 
-        #top-right-image {
-            position: absolute;
-            width: 350px; 
-            height: 200px;
-            top: 10px;
-        }
-
-        #top-left-image {
-            position: absolute;
-            width: 200px; 
-            height: 200px;
-            top: 10px;
-            padding-left: 80px;
-        }
-
-        #top-left-image {
-            left: 10px;
-        }
-
-        #top-right-image {
-            right: 10px;
-        }
-
         .day {
             text-align: center;
             margin: 10px;
@@ -80,11 +57,7 @@
     </style>
 </head>
 <body>
-    <img id="top-left-image" src="cloud.jpeg" alt="Top Left Image">
-    <img id="top-right-image" src="earth.jpeg" alt="Top Right Image">
-
     <div id="weather-container">
-
         <div id="current-weather">
             <img src="https://placekitten.com/300/200" alt="Weather Mood">
             <h2>Current Weather</h2>
@@ -97,7 +70,7 @@
             <!-- Day 1 -->
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
-                <h3>Day 1</h3>
+                <h3 id="day1">Day 1</h3>
                 <p id="max_day1">Max Temp: 24°C</p>
                 <p id="min_day1">Min Temp: 14°C</p>
             </div>
@@ -105,7 +78,7 @@
             <!-- Day 2 -->
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
-                <h3>Day 2</h3>
+                <h3 id="day2">Day 2</h3>
                 <p id="max_day2">Max Temp: 26°C</p>
                 <p id="min_day2">Min Temp: 16°C</p>
             </div>
@@ -113,7 +86,7 @@
             <!-- Day 3 -->
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
-                <h3>Day 3</h3>
+                <h3 id="day3">Day 3</h3>
                 <p id="max_day3">Max Temp: 23°C</p>
                 <p id="min_day3">Min Temp: 13°C</p>
             </div>
@@ -121,7 +94,7 @@
             <!-- Day 4 -->
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
-                <h3>Day 4</h3>
+                <h3 id="day4">Day 4</h3>
                 <p id="max_day4">Max Temp: 22°C</p>
                 <p id="min_day4">Min Temp: 12°C</p>
             </div>
@@ -129,33 +102,42 @@
             <!-- Day 5 -->
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
-                <h3>Day 5</h3>
+                <h3 id="day5">Day 5</h3>
                 <p id="max_day5">Max Temp: 25°C</p>
                 <p id="min_day5">Min Temp: 15°C</p>
             </div>
-
-            <script type="text/javascript">
-                document.getElementById("current_temp").innerText = "Temperature: " + localStorage.getItem("currentTemp") + "°C";
-                document.getElementById("current_aqi").innerText = "AQI: " + localStorage.getItem("currentAqi")
-                document.getElementById("current_clouds").innerText = "Clouds: " + localStorage.getItem("currentClouds");
-
-
-                document.getElementById("max_day1").innerText = "Max Temp: " + localStorage.getItem("maxtemp1") + "°C";
-                document.getElementById("min_day1").innerText = "Min Temp: " + localStorage.getItem("mintemp1") + "°C";
-                document.getElementById("max_day2").innerText = "Max Temp: " + localStorage.getItem("maxtemp2") + "°C";
-                document.getElementById("min_day2").innerText = "Min Temp: " + localStorage.getItem("mintemp2") + "°C";
-                document.getElementById("min_day3").innerText = "Min Temp: " + localStorage.getItem("mintemp3") + "°C";
-                document.getElementById("min_day3").innerText = "Min Temp: " + localStorage.getItem("mintemp3") + "°C";
-                document.getElementById("min_day4").innerText = "Min Temp: " + localStorage.getItem("mintemp4") + "°C";
-                document.getElementById("max_day4").innerText = "Max Temp: " + localStorage.getItem("maxtemp4") + "°C";
-                document.getElementById("min_day5").innerText = "Min Temp: " + localStorage.getItem("mintemp5") + "°C";
-                document.getElementById("min_day5").innerText = "Min Temp: " + localStorage.getItem("mintemp5") + "°C";
-
-            </script>
-
         </div>
-
     </div>
 
+    <script type="text/javascript">
+        const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const currentDate = new Date();
+        let currentDayOfWeek = currentDate.getDay();
+
+        for (let i = 1; i <= 5; i++) {
+            currentDayOfWeek = (currentDayOfWeek + 1) % 7; 
+            const dayElement = document.getElementById(`day${i}`);
+            if (dayElement) {
+                dayElement.innerText = daysOfWeek[currentDayOfWeek];
+            }
+        }
+
+        // This part assumes you have localStorage data to set the weather information for the current and next days.
+        document.getElementById("current_temp").innerText = "Temperature: " + localStorage.getItem("currentTemp") + "°C";
+        document.getElementById("current_aqi").innerText = "AQI: " + localStorage.getItem("currentAqi");
+        document.getElementById("current_clouds").innerText = "Clouds: " + localStorage.getItem("currentClouds");
+
+        // Set localStorage values for max and min temperatures for each day similarly to retrieve from localStorage.
+        document.getElementById("max_day1").innerText = "Max Temp: " + localStorage.getItem("maxtemp1") + "°C";
+        document.getElementById("min_day1").innerText = "Min Temp: " + localStorage.getItem("mintemp1") + "°C";
+        document.getElementById("max_day2").innerText = "Max Temp: " + localStorage.getItem("maxtemp2") + "°C";
+        document.getElementById("min_day2").innerText = "Min Temp: " + localStorage.getItem("mintemp2") + "°C";
+        document.getElementById("max_day3").innerText = "Max Temp: " + localStorage.getItem("maxtemp3") + "°C";
+        document.getElementById("min_day3").innerText = "Min Temp: " + localStorage.getItem("mintemp3") + "°C";
+        document.getElementById("max_day4").innerText = "Max Temp: " + localStorage.getItem("maxtemp4") + "°C";
+        document.getElementById("min_day4").innerText = "Min Temp: " + localStorage.getItem("mintemp4") + "°C";
+        document.getElementById("max_day5").innerText = "Max Temp: " + localStorage.getItem("maxtemp5") + "°C";
+        document.getElementById("min_day5").innerText = "Min Temp: " + localStorage.getItem("mintemp5") + "°C";
+    </script>
 </body>
 </html>
