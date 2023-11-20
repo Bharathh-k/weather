@@ -59,57 +59,119 @@
 <body>
     <div id="weather-container">
         <div id="current-weather">
-            <img src="https://placekitten.com/300/200" alt="Weather Mood">
+            <div id="img" style="image-resolution: 50;"><img src="https://placekitten.com/300/200" alt="Weather Mood"></div>
             <h2>Current Weather</h2>
             <p id="current_temp">Current Temp: 20°C</p>
             <p id="current_aqi">AQI: 100</p>
             <p id="current_clouds">Clouds: 50</p>
+            <p id="current_mood">Mood</p>
         </div>
 
         <div id="forecast">
             <!-- Day 1 -->
             <div class="day">
-                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <div id="img1"><img src="https://placekitten.com/100/100" alt="Weather Mood"></div>
                 <h3 id="day1">Day 1</h3>
                 <p id="max_day1">Max Temp: 24°C</p>
                 <p id="min_day1">Min Temp: 14°C</p>
+                <p id="mood1">Mood</p>
             </div>
 
             <!-- Day 2 -->
             <div class="day">
-                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <div id="img2"><img src="https://placekitten.com/100/100" alt="Weather Mood"></div>
                 <h3 id="day2">Day 2</h3>
                 <p id="max_day2">Max Temp: 26°C</p>
                 <p id="min_day2">Min Temp: 16°C</p>
+                <p id="mood2">Mood</p>
             </div>
 
             <!-- Day 3 -->
             <div class="day">
-                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <div id="img3"><img src="https://placekitten.com/100/100" alt="Weather Mood"></div>
                 <h3 id="day3">Day 3</h3>
                 <p id="max_day3">Max Temp: 23°C</p>
                 <p id="min_day3">Min Temp: 13°C</p>
+                <p id="mood3">Mood</p>
             </div>
 
             <!-- Day 4 -->
             <div class="day">
-                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <div id="img4"><img src="https://placekitten.com/100/100" alt="Weather Mood"></div>
                 <h3 id="day4">Day 4</h3>
                 <p id="max_day4">Max Temp: 22°C</p>
                 <p id="min_day4">Min Temp: 12°C</p>
+                <p id="mood4">Mood</p>
             </div>
 
             <!-- Day 5 -->
             <div class="day">
-                <img src="https://placekitten.com/100/100" alt="Weather Mood">
+                <div id="img5"><img src="https://placekitten.com/100/100" alt="Weather Mood"></div>
                 <h3 id="day5">Day 5</h3>
                 <p id="max_day5">Max Temp: 25°C</p>
                 <p id="min_day5">Min Temp: 15°C</p>
+                <p id="mood5">Mood</p>
             </div>
         </div>
     </div>
 
     <script type="text/javascript">
+        // Get the weather description from the API
+        var weatherDescription = localStorage.getItem("currentMood");
+        var weatherDescription1 = localStorage.getItem("mood1");
+        var weatherDescription2 = localStorage.getItem("mood2");
+        var weatherDescription3 = localStorage.getItem("mood3");
+        var weatherDescription4 = localStorage.getItem("mood4");
+        var weatherDescription5 = localStorage.getItem("mood5");
+
+
+        // Get the div where you want to display the image
+        var imageDiv = document.getElementById("img");
+        var imageDiv1 = document.getElementById("img1");
+        var imageDiv2 = document.getElementById("img2");
+        var imageDiv3 = document.getElementById("img3");
+        var imageDiv4 = document.getElementById("img4");
+        var imageDiv5 = document.getElementById("img5");
+
+        // Object mapping weather descriptions to image paths
+        var weatherImages = {
+            "clear sky": "clear_sky.jpeg",
+            "heavy rain": "heavy_rain.jpeg",
+            "moderate rain": "moderate_rain.jpeg",
+            "broken clouds": "broken_clouds.jpeg"
+            // Add other weather descriptions and their respective image paths
+        };
+        if (weatherDescription.toLowerCase() in weatherImages) {
+            imageDiv.innerHTML = `<img src="${weatherImages[weatherDescription.toLowerCase()]}" style="width: 200px; height: 150px;">`;
+        } else {
+            imageDiv.innerHTML = `<img src="default.jpeg> style="width: 200px; height: 150px;"`;
+        }
+        if (weatherDescription1.toLowerCase() in weatherImages) {
+            imageDiv1.innerHTML = `<img src="${weatherImages[weatherDescription1.toLowerCase()]}" style="width: 200px; height: 150px;">`;
+        } else {
+            imageDiv1.innerHTML = `<img src="default.jpeg" style="width: 200px; height: 150px;">`;
+        }
+        if (weatherDescription2.toLowerCase() in weatherImages) {
+            imageDiv2.innerHTML = `<img src="${weatherImages[weatherDescription2.toLowerCase()]}" style="width: 200px; height: 150px;">`;
+        } else {
+            imageDiv2.innerHTML = `<img src="default.jpeg" style="width: 200px; height: 150px;">`;
+        }
+        if (weatherDescription3.toLowerCase() in weatherImages) {
+            imageDiv3.innerHTML = `<img src="${weatherImages[weatherDescription3.toLowerCase()]}" style="width: 200px; height: 150px;">`;
+        } else {
+            imageDiv3.innerHTML = `<img src="default.jpeg" style="width: 200px; height: 150px;">`;
+        }
+        if (weatherDescription4.toLowerCase() in weatherImages) {
+            imageDiv4.innerHTML = `<img src="${weatherImages[weatherDescription4.toLowerCase()]}" style="width: 200px; height: 150px;">`;
+        } else {
+            imageDiv4.innerHTML = `<img src="default.jpeg" style="width: 200px; height: 150px;">`;
+        }
+        if (weatherDescription5.toLowerCase() in weatherImages) {
+            imageDiv5.innerHTML = `<img src="${weatherImages[weatherDescription5.toLowerCase()]}" style="width: 200px; height: 150px;">`;
+        } else {
+            imageDiv5.innerHTML = `<img src="default.jpeg" style="width: 200px; height: 150px;">`;
+        }
+
         const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const currentDate = new Date();
         let currentDayOfWeek = currentDate.getDay();
@@ -126,18 +188,24 @@
         document.getElementById("current_temp").innerText = "Temperature: " + localStorage.getItem("currentTemp") + "°C";
         document.getElementById("current_aqi").innerText = "AQI: " + localStorage.getItem("currentAqi");
         document.getElementById("current_clouds").innerText = "Clouds: " + localStorage.getItem("currentClouds");
+        document.getElementById("current_mood").innerText = "Mood: " + localStorage.getItem("currentMood");
 
         // Set localStorage values for max and min temperatures for each day similarly to retrieve from localStorage.
         document.getElementById("max_day1").innerText = "Max Temp: " + localStorage.getItem("maxtemp1") + "°C";
         document.getElementById("min_day1").innerText = "Min Temp: " + localStorage.getItem("mintemp1") + "°C";
+        document.getElementById("mood1").innerText = "Mood: " + localStorage.getItem("mood1");
         document.getElementById("max_day2").innerText = "Max Temp: " + localStorage.getItem("maxtemp2") + "°C";
         document.getElementById("min_day2").innerText = "Min Temp: " + localStorage.getItem("mintemp2") + "°C";
+        document.getElementById("mood2").innerText = "Mood: " + localStorage.getItem("mood2");
         document.getElementById("max_day3").innerText = "Max Temp: " + localStorage.getItem("maxtemp3") + "°C";
         document.getElementById("min_day3").innerText = "Min Temp: " + localStorage.getItem("mintemp3") + "°C";
+        document.getElementById("mood3").innerText = "Mood: " + localStorage.getItem("mood3");
         document.getElementById("max_day4").innerText = "Max Temp: " + localStorage.getItem("maxtemp4") + "°C";
         document.getElementById("min_day4").innerText = "Min Temp: " + localStorage.getItem("mintemp4") + "°C";
+        document.getElementById("mood4").innerText = "Mood: " + localStorage.getItem("mood4");
         document.getElementById("max_day5").innerText = "Max Temp: " + localStorage.getItem("maxtemp5") + "°C";
         document.getElementById("min_day5").innerText = "Min Temp: " + localStorage.getItem("mintemp5") + "°C";
+        document.getElementById("mood5").innerText = "Mood: " + localStorage.getItem("mood5");
     </script>
 </body>
 </html>
