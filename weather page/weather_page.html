@@ -88,9 +88,9 @@
         <div id="current-weather">
             <img src="https://placekitten.com/300/200" alt="Weather Mood">
             <h2>Current Weather</h2>
-            <p>Max Temp: 25°C</p>
-            <p>Min Temp: 15°C</p>
-            <p>Current Temp: 20°C</p>
+            <p id="current_temp">Current Temp: 20°C</p>
+            <p id="current_aqi">AQI: 100</p>
+            <p id="current_clouds">Clouds: 50</p>
         </div>
 
         <div id="forecast">
@@ -98,49 +98,61 @@
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
                 <h3>Day 1</h3>
-                <p>Max Temp: 24°C</p>
-                <p>Min Temp: 14°C</p>
+                <p id="max_day1">Max Temp: 24°C</p>
+                <p id="min_day1">Min Temp: 14°C</p>
             </div>
 
             <!-- Day 2 -->
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
                 <h3>Day 2</h3>
-                <p>Max Temp: 26°C</p>
-                <p>Min Temp: 16°C</p>
+                <p id="max_day2">Max Temp: 26°C</p>
+                <p id="min_day2">Min Temp: 16°C</p>
             </div>
 
             <!-- Day 3 -->
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
                 <h3>Day 3</h3>
-                <p>Max Temp: 23°C</p>
-                <p>Min Temp: 13°C</p>
+                <p id="max_day3">Max Temp: 23°C</p>
+                <p id="min_day3">Min Temp: 13°C</p>
             </div>
 
             <!-- Day 4 -->
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
                 <h3>Day 4</h3>
-                <p>Max Temp: 22°C</p>
-                <p>Min Temp: 12°C</p>
+                <p id="max_day4">Max Temp: 22°C</p>
+                <p id="min_day4">Min Temp: 12°C</p>
             </div>
 
             <!-- Day 5 -->
             <div class="day">
                 <img src="https://placekitten.com/100/100" alt="Weather Mood">
                 <h3>Day 5</h3>
-                <p>Max Temp: 25°C</p>
-                <p>Min Temp: 15°C</p>
+                <p id="max_day5">Max Temp: 25°C</p>
+                <p id="min_day5">Min Temp: 15°C</p>
             </div>
 
-            <!-- Day 6 -->
-            <div class="day">
-                <img src="https://placekitten.com/100/100" alt="Weather Mood">
-                <h3>Day 6</h3>
-                <p>Max Temp: 27°C</p>
-                <p>Min Temp: 17°C</p>
-            </div>
+            <script type="text/javascript">
+                document.getElementById("current_temp").innerText = "Temperature: " + localStorage.getItem("currentTemp") + "°C";
+                document.getElementById("current_aqi").innerText = "AQI: " + localStorage.getItem("currentAqi")
+                document.getElementById("current_clouds").innerText = "Clouds: " + localStorage.getItem("currentClouds");
+
+
+                document.getElementById("max_day1").innerText = "Max Temp: " + localStorage.getItem("maxtemp1") + "°C";
+                document.getElementById("min_day1").innerText = "Min Temp: " + localStorage.getItem("mintemp1") + "°C";
+                document.getElementById("max_day2").innerText = "Max Temp: " + localStorage.getItem("maxtemp2") + "°C";
+                document.getElementById("min_day2").innerText = "Min Temp: " + localStorage.getItem("mintemp2") + "°C";
+                document.getElementById("min_day3").innerText = "Min Temp: " + localStorage.getItem("mintemp3") + "°C";
+                document.getElementById("min_day3").innerText = "Min Temp: " + localStorage.getItem("mintemp3") + "°C";
+                document.getElementById("min_day4").innerText = "Min Temp: " + localStorage.getItem("mintemp4") + "°C";
+                document.getElementById("max_day4").innerText = "Max Temp: " + localStorage.getItem("maxtemp4") + "°C";
+                document.getElementById("min_day5").innerText = "Min Temp: " + localStorage.getItem("mintemp5") + "°C";
+                document.getElementById("min_day5").innerText = "Min Temp: " + localStorage.getItem("mintemp5") + "°C";
+
+            </script>
+
         </div>
 
     </div>
