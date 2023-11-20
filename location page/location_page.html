@@ -96,8 +96,8 @@
     </style>
 </head>
 <body>
-    <img id="top-left-image" src="cloud.jpg" alt="Top Left Image">
-    <img id="top-right-image" src="earth.jpg" alt="Top Right Image">
+    <img id="top-left-image" src="cloud.jpeg" alt="Top Left Image">
+    <img id="top-right-image" src="earth.jpeg" alt="Top Right Image">
     <div class="container">
         <div id="left-box">
             <input type="text" id="locationInput" placeholder="Enter location">
@@ -131,10 +131,13 @@
                         var temp=data.data[0].app_temp;
                         var aqi=data.data[0].aqi;
                         var clouds=data.data[0].clouds;
+                        var mood=data.data[0].weather.description;
 
                         localStorage.setItem("currentTemp", temp);
                         localStorage.setItem("currentAQI", aqi);
                         localStorage.setItem("currentClouds", clouds);
+                        localStorage.setItem("currentMood", mood);
+
 
                         //weatherInfo.innerHTML="temperature = "+temp+"<br/>"+"aqi= "+aqi+"<br/>"+"clouds = "+clouds+"<br/>"
             })
@@ -154,18 +157,23 @@
                 console.log("Weather Forecast = "+locationInput+": ",data);
                 var maxtemp1=data.data[0].app_max_temp;
                 var mintemp1=data.data[0].app_min_temp;
+                var mood1=data.data[0].weather.description;
 
                 var maxtemp2=data.data[1].app_max_temp;
                 var mintemp2=data.data[1].app_min_temp;
+                var mood2=data.data[1].weather.description;
 
                 var maxtemp3=data.data[2].app_max_temp;
                 var mintemp3=data.data[2].app_min_temp;
+                var mood3=data.data[2].weather.description;
 
                 var maxtemp4=data.data[3].app_max_temp;
                 var mintemp4=data.data[3].app_min_temp;
+                var mood4=data.data[3].weather.description;
 
                 var maxtemp5=data.data[4].app_max_temp;
                 var mintemp5=data.data[4].app_min_temp;
+                var mood5=data.data[4].weather.description;
 
                 // day_1.innerHTML=`max temp = ${maxtemp1}`+"<br/>"+`min temp = ${mintemp1}`;
                 // day_2.innerHTML=`max temp = ${maxtemp2}`+"<br/>"+`min temp = ${mintemp2}`;
@@ -187,9 +195,14 @@
                 localStorage.setItem("mintemp4", mintemp4);
                 localStorage.setItem("maxtemp5", maxtemp5);
                 localStorage.setItem("mintemp5", mintemp5);
+                localStorage.setItem("mood1", mood1);
+                localStorage.setItem("mood2", mood2);
+                localStorage.setItem("mood3", mood3);
+                localStorage.setItem("mood4", mood4);
+                localStorage.setItem("mood5", mood5);
 
-    // Redirect to the new HTML file
-    //window.location.href = "weatherpage.html";
+                // Redirect to the new HTML file
+                window.location.href = "weather_page.html";
                 });
             })
             } else {
@@ -221,15 +234,17 @@
                 var temp=data.data[0].app_temp;
                 var aqi=data.data[0].aqi;
                 var clouds=data.data[0].clouds;
+                var mood=data.data[0].weather.description;
 
                 localStorage.setItem("currentTemp", temp);
                 localStorage.setItem("currentAQI", aqi);
                 localStorage.setItem("currentClouds", clouds);
+                localStorage.setItem("currentMood", mood)
 
                 //weatherInfoElement.innerHTML="temperature = "+temp+"<br/>"+"aqi= "+aqi+"<br/>"+"clouds = "+clouds+"<br/>"
             })
             .catch(error => {
-                //alert("Error fetching weather data: " + error.message);
+                alert("Error fetching weather data: " + error.message);
             });
         fetch(apiUrl2)
             .then(response=>response.json())
@@ -237,18 +252,23 @@
                 console.log("Weather Forecast = "+locationInput+": ",data);
                 var maxtemp1=data.data[0].app_max_temp;
                 var mintemp1=data.data[0].app_min_temp;
+                var mood1=data.data[0].weather.description;
 
                 var maxtemp2=data.data[1].app_max_temp;
                 var mintemp2=data.data[1].app_min_temp;
+                var mood2=data.data[1].weather.description;
 
                 var maxtemp3=data.data[2].app_max_temp;
                 var mintemp3=data.data[2].app_min_temp;
+                var mood3=data.data[2].weather.description;
 
                 var maxtemp4=data.data[3].app_max_temp;
                 var mintemp4=data.data[3].app_min_temp;
+                var mood4=data.data[3].weather.description;
 
                 var maxtemp5=data.data[4].app_max_temp;
                 var mintemp5=data.data[4].app_min_temp;
+                var mood5=data.data[4].weather.description;
 
                 // day_1.innerHTML=`max temp = ${maxtemp1}`+"<br/>"+`min temp = ${mintemp1}`;
                 // day_2.innerHTML=`max temp = ${maxtemp2}`+"<br/>"+`min temp = ${mintemp2}`;
@@ -267,9 +287,14 @@
             localStorage.setItem("mintemp4", mintemp4);
             localStorage.setItem("maxtemp5", maxtemp5);
             localStorage.setItem("mintemp5", mintemp5);
+            localStorage.setItem("mood1", mood1);
+            localStorage.setItem("mood2", mood2);
+            localStorage.setItem("mood3", mood3);
+            localStorage.setItem("mood4", mood4);
+            localStorage.setItem("mood5", mood5);
 
             // Redirect to the new HTML file
-            //window.location.href = "weatherpage.html";
+            window.location.href = "weather_page.html";
 
             })
         }
