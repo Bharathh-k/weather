@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location Page</title>
+    <title>Login Page</title>
     <style>
         body {
             background-color: black;
@@ -17,19 +17,21 @@
             position: relative;
         }
 
-        .container {
-            display: flex;
-            justify-content: space-between;
-            width: 600px;
-        }
-
-        #left-box, #right-box {
+        #login-container {
             text-align: center;
             padding: 20px;
             border: 1px solid white;
             border-radius: 10px;
             background-color: rgba(0, 0, 0, 0.5);
-            width: 280px;
+            width: 300px;
+            margin: auto;
+            position: relative;
+        }
+
+        #login-container img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
         }
 
         input {
@@ -39,7 +41,6 @@
             border: none;
             border-radius: 5px;
             width: 100%;
-            text-align: center;
         }
 
         button {
@@ -76,202 +77,26 @@
         #top-right-image {
             right: 10px;
         }
-
-        #right-box {
-            text-align: center;
-            padding: 20px;
-            border: 1px solid white;
-            border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-            width: 280px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #right-box button {
-            margin: 0 auto;
-        }
     </style>
 </head>
 <body>
-    <img id="top-left-image" src="cloud.jpg" alt="Top Left Image">
-    <img id="top-right-image" src="earth.jpg" alt="Top Right Image">
-    <div class="container">
-        <div id="left-box">
-            <input type="text" id="locationInput" placeholder="Enter location">
+    <img id="top-left-image" src="cloud.jpeg" alt="Top Left Image">
+    <img id="top-right-image" src="earth.jpeg" alt="Top Right Image">
 
-            <button onclick="fetchWeatherData()">Fetch Weather Data</button>
-        </div>
-        <div id="right-box">
-            <button onclick="detectLocation()">Detect Location Automatically</button>
-        </div>
+    <div id="login-container">
+        <img src="person.jpeg" alt="Login Image">
+        <form>
+            <input type="text" placeholder="Username" required>
+            <br>
+            <input type="password" placeholder="Password" required>
+            <br>
+            <button type="button" onclick="openNewPage()">Login</button>
+        </form>
     </div>
-<div id="weatherInfo"></div>
-<div id="day0"></div>
-<div id="day1"></div>
-<div id="day2"></div>
-<div id="day3"></div>
-<div id="day4"></div>
-
 
     <script>
-        function detectLocation() {
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
-                    alert("Location detected: Latitude " + latitude + ", Longitude " + longitude);
-                    var apiUrl=`https://api.weatherbit.io/v2.0/current?lat=${latitude}&lon=${longitude}&key=de0f4910f81b4e2fba0f51dcfad53275`;
-                    fetch(apiUrl)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log("Weather data for " + locationInput + ": ", data);
-                        var temp=data.data[0].app_temp;
-                        var aqi=data.data[0].aqi;
-                        var clouds=data.data[0].clouds;
-
-                        localStorage.setItem("currentTemp", temp);
-                        localStorage.setItem("currentAQI", aqi);
-                        localStorage.setItem("currentClouds", clouds);
-
-                        //weatherInfo.innerHTML="temperature = "+temp+"<br/>"+"aqi= "+aqi+"<br/>"+"clouds = "+clouds+"<br/>"
-            })
-            .catch(error => {
-                alert("Error fetching weather data: " + error.message);
-            });
-            var day_1=document.getElementById("day0");
-            var day_2=document.getElementById("day1");
-            var day_3=document.getElementById("day2");
-            var day_4=document.getElementById("day3");
-            var day_5=document.getElementById("day4");
-        
-                var apiUrl2=`https://api.weatherbit.io/v2.0/forecast/daily?lat=${latitude}&lon=${longitude}&key=de0f4910f81b4e2fba0f51dcfad53275`
-                fetch(apiUrl2)
-                .then(response=>response.json())
-                .then(data=>{
-                console.log("Weather Forecast = "+locationInput+": ",data);
-                var maxtemp1=data.data[0].app_max_temp;
-                var mintemp1=data.data[0].app_min_temp;
-
-                var maxtemp2=data.data[1].app_max_temp;
-                var mintemp2=data.data[1].app_min_temp;
-
-                var maxtemp3=data.data[2].app_max_temp;
-                var mintemp3=data.data[2].app_min_temp;
-
-                var maxtemp4=data.data[3].app_max_temp;
-                var mintemp4=data.data[3].app_min_temp;
-
-                var maxtemp5=data.data[4].app_max_temp;
-                var mintemp5=data.data[4].app_min_temp;
-
-                // day_1.innerHTML=`max temp = ${maxtemp1}`+"<br/>"+`min temp = ${mintemp1}`;
-                // day_2.innerHTML=`max temp = ${maxtemp2}`+"<br/>"+`min temp = ${mintemp2}`;
-                // day_3.innerHTML=`max temp = ${maxtemp3}`+"<br/>"+`min temp = ${mintemp3}`;
-                // day_4.innerHTML=`max temp = ${maxtemp4}`+"<br/>"+`min temp = ${mintemp4}`;
-                // day_5.innerHTML=`max temp = ${maxtemp5}`+"<br/>"+`min temp = ${mintemp5}`;
-
-                
-                
-
-                // Set forecast data for the next 5 days in localStorage
-                localStorage.setItem("maxtemp1", maxtemp1);
-                localStorage.setItem("mintemp1", mintemp1);
-                localStorage.setItem("maxtemp2", maxtemp2);
-                localStorage.setItem("mintemp2", mintemp2);
-                localStorage.setItem("maxtemp3", maxtemp3);
-                localStorage.setItem("mintemp3", mintemp3);
-                localStorage.setItem("maxtemp4", maxtemp4);
-                localStorage.setItem("mintemp4", mintemp4);
-                localStorage.setItem("maxtemp5", maxtemp5);
-                localStorage.setItem("mintemp5", mintemp5);
-
-    // Redirect to the new HTML file
-    //window.location.href = "weatherpage.html";
-                });
-            })
-            } else {
-                alert("Geolocation is not supported in your browser.");
-            }
-        }
-
-        function fetchWeatherData() {
-        var locationInput = document.getElementById("locationInput").value;
-        var weatherInfoElement=document.getElementById("weatherInfo");
-        var day_1=document.getElementById("day0");
-        var day_2=document.getElementById("day1");
-        var day_3=document.getElementById("day2");
-        var day_4=document.getElementById("day3");
-        var day_5=document.getElementById("day4");
-        
-        var apiUrl = "https://api.weatherbit.io/v2.0/current?&city=" + encodeURIComponent(locationInput) + "&key=de0f4910f81b4e2fba0f51dcfad53275&include=minutely";
-        var apiUrl2="https://api.weatherbit.io/v2.0/forecast/daily?city="+encodeURIComponent(locationInput)+"&key=de0f4910f81b4e2fba0f51dcfad53275"
-        if (!locationInput) {
-            alert("Please enter a location.");
-            return;
-        }
-
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                console.log("Weather data for " + locationInput + ": ", data);
-                var temp=data.data[0].app_temp;
-                var aqi=data.data[0].aqi;
-                var clouds=data.data[0].clouds;
-
-                localStorage.setItem("currentTemp", temp);
-                localStorage.setItem("currentAQI", aqi);
-                localStorage.setItem("currentClouds", clouds);
-
-                //weatherInfoElement.innerHTML="temperature = "+temp+"<br/>"+"aqi= "+aqi+"<br/>"+"clouds = "+clouds+"<br/>"
-            })
-            .catch(error => {
-                //alert("Error fetching weather data: " + error.message);
-            });
-        fetch(apiUrl2)
-            .then(response=>response.json())
-            .then(data=>{
-                console.log("Weather Forecast = "+locationInput+": ",data);
-                var maxtemp1=data.data[0].app_max_temp;
-                var mintemp1=data.data[0].app_min_temp;
-
-                var maxtemp2=data.data[1].app_max_temp;
-                var mintemp2=data.data[1].app_min_temp;
-
-                var maxtemp3=data.data[2].app_max_temp;
-                var mintemp3=data.data[2].app_min_temp;
-
-                var maxtemp4=data.data[3].app_max_temp;
-                var mintemp4=data.data[3].app_min_temp;
-
-                var maxtemp5=data.data[4].app_max_temp;
-                var mintemp5=data.data[4].app_min_temp;
-
-                // day_1.innerHTML=`max temp = ${maxtemp1}`+"<br/>"+`min temp = ${mintemp1}`;
-                // day_2.innerHTML=`max temp = ${maxtemp2}`+"<br/>"+`min temp = ${mintemp2}`;
-                // day_3.innerHTML=`max temp = ${maxtemp3}`+"<br/>"+`min temp = ${mintemp3}`;
-                // day_4.innerHTML=`max temp = ${maxtemp4}`+"<br/>"+`min temp = ${mintemp4}`;
-                // day_5.innerHTML=`max temp = ${maxtemp5}`+"<br/>"+`min temp = ${mintemp5}`;
-
-            // Set forecast data for the next 5 days in localStorage
-            localStorage.setItem("maxtemp1", maxtemp1);
-            localStorage.setItem("mintemp1", mintemp1);
-            localStorage.setItem("maxtemp2", maxtemp2);
-            localStorage.setItem("mintemp2", mintemp2);
-            localStorage.setItem("maxtemp3", maxtemp3);
-            localStorage.setItem("mintemp3", mintemp3);
-            localStorage.setItem("maxtemp4", maxtemp4);
-            localStorage.setItem("mintemp4", mintemp4);
-            localStorage.setItem("maxtemp5", maxtemp5);
-            localStorage.setItem("mintemp5", mintemp5);
-
-            // Redirect to the new HTML file
-            //window.location.href = "weatherpage.html";
-
-            })
+        function openNewPage() {
+            window.open("location_page.html", "_blank");
         }
     </script>
 </body>
